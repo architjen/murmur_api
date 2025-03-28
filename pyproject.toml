@@ -1,7 +1,7 @@
 [project]
 name = "murmur-api"
 version = "0.1.0"
-description = "ASR projevt on FastAPI"
+description = "ASR project on FastAPI"
 readme = "README.md"
 authors = [
     { name = "architjen", email = "architjen010@gmail.com" }
@@ -26,4 +26,4 @@ dev-dependencies = [
 extend-select = ["E", "W"]
 
 [tool.pytest.ini_options]
-testpaths = ["src/tests/"]
+testpaths = ["tests/"]
