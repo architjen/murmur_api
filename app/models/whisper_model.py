@@ -1,0 +1,17 @@
+from faster_whisper import WhisperModel
+import tempfile
+from fastapi import UploadFile
+
+# create whisper model here
+# using cpu based model with int8 
+# cuda, with float16 could've been used
+model = WhisperModel("base", device="cpu", compute_type="int8")
+
+async def transcribe_audio(file: UploadFile):
+    with tempfile.NamedTemporaryFile(delete=False) as temp_file:
+        temp_file.write(await file.read())
+        temp_file_path = temp_file.name
+
+    # result is a generator here
+    result, _ = model.transcribe(temp_file_path)
+    return list(result)
