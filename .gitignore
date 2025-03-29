@@ -13,3 +13,6 @@ wheels/
 .pytest_cache
 
 .DS_Store
+
+# env vars
+.env
