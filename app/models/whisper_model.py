@@ -16,6 +16,6 @@ async def transcribe_audio(file: UploadFile):
         temp_file_path = temp_file.name
 
     # result is a generator here
-    result, _ = model.transcribe(temp_file_path)
+    result, info = model.transcribe(temp_file_path)
     latency = time.time() - start_time
-    return " ".join(segment.text for segment in result), latency
+    return " ".join(segment.text for segment in result), latency, info.duration

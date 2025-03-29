@@ -4,6 +4,7 @@ from pydantic import BaseModel
 class EndPointCallBase(BaseModel):
     content: str
     call_latency: float
+    length: float
 
 
 class EndPointCallCreate(EndPointCallBase):
