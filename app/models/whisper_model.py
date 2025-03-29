@@ -1,6 +1,7 @@
 from faster_whisper import WhisperModel
 import tempfile
 from fastapi import UploadFile
+import time
 
 # create whisper model here
 # using cpu based model with int8
@@ -9,10 +10,12 @@ model = WhisperModel("base", device="cpu", compute_type="int8")
 
 
 async def transcribe_audio(file: UploadFile):
+    start_time = time.time()
     with tempfile.NamedTemporaryFile(delete=False) as temp_file:
         temp_file.write(await file.read())
         temp_file_path = temp_file.name
 
     # result is a generator here
     result, _ = model.transcribe(temp_file_path)
-    return " ".join(segment.text for segment in result)
+    latency = time.time() - start_time
+    return " ".join(segment.text for segment in result), latency
