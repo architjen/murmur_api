@@ -15,4 +15,4 @@ async def transcribe_audio(file: UploadFile):
 
     # result is a generator here
     result, _ = model.transcribe(temp_file_path)
-    return list(result)
+    return " ".join(segment.text for segment in result)
