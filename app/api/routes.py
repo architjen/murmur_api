@@ -33,9 +33,9 @@ async def transcribe(file: UploadFile = File(...), db: Session = Depends(get_db)
         raise HTTPException(status_code=400, detail="Unsupported file type")
     try:
         # function call to the faster-whisper function
-        text, latency = await transcribe_audio(file)
+        text, latency, duration = await transcribe_audio(file)
         crud.create_endpointcall(
-            db, db_schema.EndPointCallCreate(content=text, call_latency=latency)
+            db, db_schema.EndPointCallCreate(content=text, call_latency=latency, length=duration)
         )
         return JSONResponse(content={"text": text})
     except Exception as e:

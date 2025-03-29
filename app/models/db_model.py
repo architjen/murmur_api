@@ -8,3 +8,4 @@ class EndPointCall(Base):
     id = Column(Integer, primary_key=True, index=True)
     content = Column(String)
     call_latency = Column(Float)
+    length = Column(Float)
