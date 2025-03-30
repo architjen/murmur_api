@@ -27,7 +27,9 @@ def hello():
 
 
 # the endpoint for transcribe
-@router.post("/transcribe", response_model=TranscriptionResponse, tags=["Transcribe Audio"])
+@router.post(
+    "/transcribe", response_model=TranscriptionResponse, tags=["Transcribe Audio"]
+)
 async def transcribe(file: UploadFile = File(...), db: Session = Depends(get_db)):
     if file.content_type not in ["audio/mpeg", "audio/wav", "audio/mp3", "audio/x-wav"]:
         raise HTTPException(status_code=400, detail="Unsupported file type")
