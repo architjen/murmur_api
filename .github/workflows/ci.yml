@@ -15,7 +15,6 @@ jobs:
     services:
       postgres:
         image: postgres:15-alpine
-        container_name: postgres_container
         env:
           POSTGRES_USER: ${{ secrets.POSTGRES_USER }}
           POSTGRES_PASSWORD: ${{ secrets.POSTGRES_PASSWORD }}
@@ -59,7 +58,3 @@ jobs:
     - name: Shutdown Docker Compose services
       run: |
         docker-compose down
-
-volumes:
-  postgres_data:
-    driver: local
