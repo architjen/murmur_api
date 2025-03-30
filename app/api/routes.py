@@ -7,8 +7,6 @@ from app.schemas.transcription import TranscriptionResponse
 from app.models.whisper_model import transcribe_audio
 from app.db.database import get_db
 from app.db import crud
-
-# from app.models import db_model
 from app.schemas import db_schema
 
 router = APIRouter()
@@ -36,6 +34,7 @@ async def transcribe(file: UploadFile = File(...), db: Session = Depends(get_db)
     try:
         # function call to the faster-whisper function
         text, latency, duration = await transcribe_audio(file)
+        # add values to db after parsing through pydantic
         crud.create_endpointcall(
             db,
             db_schema.EndPointCallCreate(
@@ -46,7 +45,7 @@ async def transcribe(file: UploadFile = File(...), db: Session = Depends(get_db)
     except Exception as e:
         raise HTTPException(status_code=500, detail=str(e))
 
-
+# gets all the data
 @router.get("/get_data", response_model=list[db_schema.EndPointCall], tags=["Data"])
 async def get_all_calls(db: Session = Depends(get_db)):
     return crud.get_endpointcalls(db)

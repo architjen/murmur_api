@@ -8,14 +8,14 @@ import time
 # cuda, with float16 could've been used
 model = WhisperModel("base", device="cpu", compute_type="int8")
 
-
+# function that transcribes the audio
 async def transcribe_audio(file: UploadFile):
     start_time = time.time()
     with tempfile.NamedTemporaryFile(delete=False) as temp_file:
         temp_file.write(await file.read())
         temp_file_path = temp_file.name
 
-    # result is a generator here
+    # transcription text along with other meta data
     result, info = model.transcribe(temp_file_path)
     latency = time.time() - start_time
     return " ".join(segment.text for segment in result), latency, info.duration

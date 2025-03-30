@@ -1,6 +1,6 @@
 from pydantic import BaseModel
 
-
+# building the base validation class for others
 class EndPointCallBase(BaseModel):
     content: str
     call_latency: float
