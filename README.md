@@ -1,17 +1,32 @@
-![CI](https://github.com/architjen/murmur_api/actions/workflows/code_quality_ci.yml/badge.svg)
-
 # ASR Project using Faster-Whisper and FastAPI
+![CI](https://github.com/architjen/murmur_api/actions/workflows/code_quality_ci.yml/badge.svg)
+![Python](https://img.shields.io/badge/python-3.12%2B-blue)
+![FastAPI](https://img.shields.io/badge/FastAPI-005571?style=for-the-badge&logo=fastapi)
 
 The goal of this project is to provide a fast and efficient ASR service through a web API that can transcribe audio files into text.
 
 The project uses `faster-whisper` model, `FastAPI` for hosting APIs, and `uv` for dependency management and virtual environment handling.  
 
-## Main Features
+## Technologies
 
 - **Faster-Whisper Model**: Utilizes the condensed Whisper model by OpenAI, optimized for fast transcription and accuracy.
 - **FastAPI Backend**: A high-performance web framework for building APIs (supports inbuilt async and type-checking)
 - **Dependency Management with uv**: Simplifies managing dependencies and virtual environments.
 - **Docker**: Docker image to quickly reproduce the project, without having to worry about the dependencies
+
+## Features 🚀
+- ✅ Whisper Model
+- ✅ FastAPI integration 
+- ✅ Metrics on database
+- ✅ Postgres Database (Persistent)
+- ✅ Dockerized
+- ✅ Unit test coverage
+- ✅ CI Workflows
+
+### Extra Feature 
+- ✅ Queue Implementation (branch: adding_queue) 
+- ✅ local deployment
+
 
 ## Getting Started
 
@@ -22,7 +37,7 @@ These instructions will help you get a copy of the project up and running on you
 - Python 3.12 or higher
 - `uv` for managing dependencies
 - Docker (optional, but recommended for setting up the environment quickly)
-- minikube, 
+- `minikube` and `kompose`
 
 ### Install Dependencies
 
@@ -163,6 +178,9 @@ FastAPI provides auto-generated documentation for the API. You can view the inte
 - **`GET /get_data/`**: To get all the transcription data
   - **Response**: list of all the transcriptions
 
+- **`GET /metrics/`**: To get the metrics on overall transcription 
+  - **Response**: a dictionary of important KPIs
+
 ## Development
 
 ### Format/Linting
@@ -199,8 +217,6 @@ uv run -m pytest
 Make sure you have all the dependencies installed, and the `.env` file is configured correctly before running the tests.
 
 ## Deployment
-
-You can deploy this application to various platforms such as AWS, Heroku, or DigitalOcean. If using Docker, you can build a Docker image and push it to Docker Hub or other container registries.
 
 ### Deploying to Kubernetes cluster
 
