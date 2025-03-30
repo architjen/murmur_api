@@ -1,7 +1,9 @@
 # ASR Project using Faster-Whisper and FastAPI
 ![CI](https://github.com/architjen/murmur_api/actions/workflows/code_quality_ci.yml/badge.svg)
-![Python](https://img.shields.io/badge/python-3.12%2B-blue)
+![Python](https://img.shields.io/badge/python-3.12%2B-blue)  
 ![FastAPI](https://img.shields.io/badge/FastAPI-005571?style=for-the-badge&logo=fastapi)
+![Docker](https://img.shields.io/badge/docker-%230db7ed.svg?style=for-the-badge&logo=docker&logoColor=white)
+
 
 The goal of this project is to provide a fast and efficient ASR service through a web API that can transcribe audio files into text.
 
