@@ -262,4 +262,29 @@ minikube ip
 
 Check the running app by going to the browser and typing the IP from the command above with port we expose example `http://10.96.184.178:8000` and you should see your app 
 
-## Improvements
+## Improvements and Optimization
+
+Few improvements that could be made to the overall project for better performance:
+
+### Processesing Audio
+- downsample the audio rates, for ex to 16kHz, could be achieved by using librosa
+- applying VAD to reduce the processing time on audio 
+- Use protocol buffers between endpoint and functions to optimise serializing and deserializing
+
+### API
+- Authentication on endpoints
+- Adding cProfile on the endpoints to find bottlenecks
+- perform load testing on the APIs
+- Adding functional tests
+- Setting up middleware-logging  
+
+### Database
+- Setting up triggers to calculate metrics, instead of running them every time.
+- Avoid the use SQL request for CRUD operations
+- Avoid pushing the same audio file twice in the database 
+- Use of asynpg + postgres to extend the FastAPI async capabilities
+
+### Operations
+- Setting up centralised logging to monitor peformance, state, and actions
+- Adding CI for docker pubish on major-release  
+
