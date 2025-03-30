@@ -8,6 +8,7 @@ import time
 # cuda, with float16 could've been used
 model = WhisperModel("base", device="cpu", compute_type="int8")
 
+
 # function that transcribes the audio
 async def transcribe_audio(file: UploadFile):
     start_time = time.time()

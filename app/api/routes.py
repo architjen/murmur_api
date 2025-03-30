@@ -45,6 +45,7 @@ async def transcribe(file: UploadFile = File(...), db: Session = Depends(get_db)
     except Exception as e:
         raise HTTPException(status_code=500, detail=str(e))
 
+
 # gets all the data
 @router.get("/get_data", response_model=list[db_schema.EndPointCall], tags=["Data"])
 async def get_all_calls(db: Session = Depends(get_db)):

@@ -7,6 +7,7 @@ from app.db.database import get_db
 
 metric_router = APIRouter()
 
+
 # metric endpoint
 @metric_router.get("/metrics", tags=["Metrics"])
 async def get_all_calls(db: Session = Depends(get_db)):
