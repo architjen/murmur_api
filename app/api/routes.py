@@ -21,13 +21,13 @@ async def index():
 
 
 # an endpoint to test
-@router.get("/ping")
+@router.get("/ping", tags=["Ping"])
 def hello():
     return {"msg": "Hello world"}
 
 
 # the endpoint for transcribe
-@router.post("/transcribe", response_model=TranscriptionResponse)
+@router.post("/transcribe", response_model=TranscriptionResponse, tags=["Transcribe Audio"])
 async def transcribe(file: UploadFile = File(...), db: Session = Depends(get_db)):
     if file.content_type not in ["audio/mpeg", "audio/wav", "audio/mp3", "audio/x-wav"]:
         raise HTTPException(status_code=400, detail="Unsupported file type")
@@ -45,6 +45,6 @@ async def transcribe(file: UploadFile = File(...), db: Session = Depends(get_db)
         raise HTTPException(status_code=500, detail=str(e))
 
 
-@router.get("/meta_data", response_model=list[db_schema.EndPointCall])
+@router.get("/get_data", response_model=list[db_schema.EndPointCall], tags=["Data"])
 async def get_all_calls(db: Session = Depends(get_db)):
     return crud.get_endpointcalls(db)

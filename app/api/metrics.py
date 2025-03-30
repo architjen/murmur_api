@@ -8,7 +8,7 @@ from app.db.database import get_db
 metric_router = APIRouter()
 
 
-@metric_router.get("/metrics")
+@metric_router.get("/metrics", tags=["Metrics"])
 async def get_all_calls(db: Session = Depends(get_db)):
     query1 = text("""
         SELECT PERCENTILE_CONT(0.5) WITHIN GROUP (ORDER BY call_latency) AS median_value
