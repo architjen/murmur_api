@@ -78,7 +78,7 @@ The simpler way would be using the `docker-compose.yml` to spin up the container
 1. Build and start the services:
 
     ```bash
-    docker compose up -d
+    docker compose up -d 
     ```
 
 2. This will set up a FastAPI application accessible at `http://localhost:8000`.
@@ -204,8 +204,46 @@ You can deploy this application to various platforms such as AWS, Heroku, or Dig
 
 ### Deploying to Kubernetes cluster
 
-Make sure to set up the environment variables on Heroku (using the Heroku Dashboard or CLI) for things like `POSTGRES_USER`, `POSTGRES_PASSWORD`, and `POSTGRES_DB`.
+To deploy on the Kubernetes cluster we are going to use `minikube` and `kompose` 
 
+**minikube**: helps run cluster locally  
+**kompose**: helps you build `.yml` files from `docker-compose.yml` for kubernetes deployment
 
+#### Steps to deploy: 
+1. To run k8s locally  
 
-## Contributing
+```bash
+minikube start
+```
+
+2. Create the .ymls files for deployment  
+
+```bash
+kompose convert -f docker-compose.yml --out manifests/
+```
+This will create the `.yml` manifests for deployment in the folder `manifests`
+
+3. Deploy to minikube
+
+```bash
+kubectl apply -f manifests/.
+```
+
+4. Check pods
+Check the pods running using the command below
+
+```bash
+kubectl get pods
+```
+
+5. Get IP
+Get the IP to access the API app
+```bash
+minikube ip
+```
+
+6. Access the app
+
+Check the running app by going to the browser and typing the IP from the command above with port we expose example `http://10.96.184.178:8000` and you should see your app 
+
+## Improvements
