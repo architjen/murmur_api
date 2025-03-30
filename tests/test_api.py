@@ -23,6 +23,7 @@ def test_transcribe_endpoint():
     assert response.status_code == 200
     assert "text" in response.json()
 
+
 def test_invalid_transcribe_endpoint():
     response = client.post("/transcribe", files={"file": "not_an_audio"})
     assert response.status_code != 200
