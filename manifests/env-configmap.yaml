@@ -1,0 +1,11 @@
+apiVersion: v1
+data:
+  DATABASE_URL: ${DATABASE_URL}
+  POSTGRES_DB: ${POSTGRES_DB}
+  POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
+  POSTGRES_USER: ${POSTGRES_USER}
+kind: ConfigMap
+metadata:
+  labels:
+    io.kompose.service: api-env
+  name: env

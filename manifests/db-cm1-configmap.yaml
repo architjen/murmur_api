@@ -1,0 +1,16 @@
+apiVersion: v1
+data:
+  create_table.sql: |-
+    CREATE TABLE endpoint_calls (
+        id SERIAL PRIMARY KEY,
+        content TEXT,
+        call_latency FLOAT,
+        length FLOAT
+    );
+kind: ConfigMap
+metadata:
+  annotations:
+    use-subpath: "true"
+  labels:
+    io.kompose.service: db
+  name: db-cm1
