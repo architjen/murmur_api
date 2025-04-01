@@ -1,6 +1,6 @@
 from fastapi import APIRouter, UploadFile, HTTPException, File, Depends
 from fastapi.responses import RedirectResponse, JSONResponse
-from sqlalchemy.orm import Session
+from sqlalchemy.ext.asyncio import AsyncSession
 
 # custom import(s)
 from app.schemas.transcription import TranscriptionResponse
@@ -28,14 +28,14 @@ def hello():
 @router.post(
     "/transcribe", response_model=TranscriptionResponse, tags=["Transcribe Audio"]
 )
-async def transcribe(file: UploadFile = File(...), db: Session = Depends(get_db)):
+async def transcribe(file: UploadFile = File(...), db: AsyncSession = Depends(get_db)):
     if file.content_type not in ["audio/mpeg", "audio/wav", "audio/mp3", "audio/x-wav"]:
         raise HTTPException(status_code=400, detail="Unsupported file type")
     try:
         # function call to the faster-whisper function
         text, latency, duration = await transcribe_audio(file)
         # add values to db after parsing through pydantic
-        crud.create_endpointcall(
+        await crud.create_endpointcall(
             db,
             db_schema.EndPointCallCreate(
                 content=text, call_latency=latency, length=duration
@@ -48,5 +48,6 @@ async def transcribe(file: UploadFile = File(...), db: Session = Depends(get_db)
 
 # gets all the data
 @router.get("/get_data", response_model=list[db_schema.EndPointCall], tags=["Data"])
-async def get_all_calls(db: Session = Depends(get_db)):
-    return crud.get_endpointcalls(db)
+async def get_all_calls(db: AsyncSession = Depends(get_db)):
+    list_ = await crud.get_endpointcalls(db)
+    return list_
