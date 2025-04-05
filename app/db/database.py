@@ -8,8 +8,8 @@ engine = create_async_engine(DATABASE_URL)
 
 # defining autocommit and autoflush to exclusively commit CRUD operations
 AsyncSessionLocal = sessionmaker(
-    autocommit=False, 
-    autoflush=False, 
+    autocommit=False,
+    autoflush=False,
     bind=engine,
     class_=AsyncSession
     )
