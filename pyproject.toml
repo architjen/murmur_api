@@ -13,8 +13,9 @@ dependencies = [
     "pydantic>=2.10.6",
     "ctranslate2==4.3.1",
     "faster-whisper==1.0.1",
-    "sqlalchemy>=2.0.40",
+    "sqlalchemy[asyncio]>=2.0.40",
     "psycopg2-binary>=2.9.10",
+    "asyncpg>=0.30.0",
 ]
 
 [tool.uv]
